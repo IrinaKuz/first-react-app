@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, CardGroup } from 'reactstrap';
-import { Media, List } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class Menu extends Component {
@@ -9,32 +9,25 @@ class Menu extends Component {
         super(props);
 
         this.state = {
-            selectedDish: null
+            selectedDish: null,
+            initialModalState: false,
+            modal: false,
+            fade: true,
         }
     }
 
     onDishSelect(i) {
         this.setState({
-            selectedDish: i
+            selectedDish: i,
+            modal: true
         })
     }
 
-    renderDish(dish) {
-        if(dish !== null) {
-            return(
-                <Card>
-                    <CardImg width="100%" src={dish.image} alt={dish.name}/>
-                    <CardBody>
-                        <CardTitle tag="h3">{dish.name}</CardTitle>
-                        <CardText>{dish.description}</CardText>
-                    </CardBody>
-                </Card>
-            )
-        } else {
-            return (
-                <div></div>
-            )
-        }
+    toggle() {
+        this.setState({
+            modal: !this.state.modal,
+            fade: !this.state.fade
+        })
     }
 
     render() {
@@ -46,7 +39,6 @@ class Menu extends Component {
                                         <CardImg width="100%" src={i.image} alt={i.name}/>
                                         <CardImgOverlay>
                                             <CardTitle tag="h3">{i.name}</CardTitle>
-                                            
                                         </CardImgOverlay>
                                     </Card>
                                 </div>
@@ -59,7 +51,26 @@ class Menu extends Component {
                         {menu}
                 </div>
                 <div className="row">
-                    {this.renderDish(this.state.selectedDish)}
+                <Modal isOpen={this.state.modal} toggle={() => this.toggle()}>
+                    <ModalHeader toggle={() => this.toggle()}>
+                        {this.state.selectedDish === null ? '' : this.state.selectedDish.name}
+                    </ModalHeader>
+                    <ModalBody>
+                        {this.state.selectedDish === null ? '': this.state.selectedDish.description}
+                    </ModalBody>
+                    <ModalFooter>
+                    <Button
+                        color="primary"
+                        onClick={() => this.toggle()}
+                    >
+                        Do Something
+                    </Button>
+                    {' '}
+                    <Button onClick={() => this.toggle()}>
+                        Cancel
+                    </Button>
+                    </ModalFooter>
+                </Modal>
                 </div>
             </div>
         );
