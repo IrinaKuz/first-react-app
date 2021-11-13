@@ -7,7 +7,7 @@ import { Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
     const MenuItem = (props) => {
         const dish = props.dish;
         return(
-            <Card onClick={() => this.props.onDishSelect(this.dish)}>
+            <Card onClick={() => props.onDishSelect(dish)}>
                 <CardImg width="100%" src={dish.image} alt={dish.name}/>
                 <CardImgOverlay>
                     <CardTitle tag="h3">{dish.name}</CardTitle>
@@ -20,12 +20,12 @@ import { Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
         const menu = props.dishes.map(i => {
                             return (
                                 <div key={i.id} className="col-12 col-sm-6 col-md-3 p-1">
-                                    <MenuItem dish={i} onDishSelect={this.props.onDishSelect}/>
+                                    <MenuItem dish={i} onDishSelect={props.onDishSelect}/>
                                 </div>
                             );
                         });
         
-        const selectedDish = props.selectedDish;
+        const selectedDish = props.selectedDish ? props.selectedDish : null;
 
         return (
             <div className="container">

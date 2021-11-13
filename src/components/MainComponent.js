@@ -1,8 +1,17 @@
 import { Component } from 'react';
-import { Navbar, NavbarBrand } from 'reactstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Menu from './MenuComponent';
+import Header from './HeaderComponent';
+import Footer from './FooterComponent';
 import { DISHES } from '../shared/dishes';
+import Home from './HomeComponent';
+import {
+    BrowserRouter as Router,
+    Switch, 
+    Route,
+    Link
+  } from "react-router-dom";
+import { Container } from 'reactstrap';
 
 class Main extends Component{
   constructor(props) {
@@ -36,25 +45,39 @@ class Main extends Component{
     }
 
     render() {
+        console.log('HomePage!')
+        const HomePage = () => {
+            return(
+                <Container>
+                    <Home />
+                </Container>
+            )
+        }
         return (
-            <div>
-                <Navbar dark color="primary">
-                    <div className="container">
-                        <NavbarBrand href="/">
-                            Ristorante Con Fusion
-                        </NavbarBrand>
-                    </div>
-                </Navbar>
-                <Menu 
-                    selectedDish={this.state.selectedDish} 
-                    dishes={this.state.dishes}
-                    onDishSelect={this.onDishSelect}
-                    isOpen={this.state.modal} 
-                    toggle={() => this.toggle()}
-                    />
-            </div>
+                    <div>
+                    <Header />
+                    <Switch>
+                        <Route path='/home' component={HomePage} />
+                        <Route exact path="/menu" component={
+                            () => <Menu dishes={this.state.dishes} 
+                                        onDishSelect={this.onDishSelect}
+                                        isOpen={this.state.modal}
+                                        toggle={() => this.toggle()}
+                            /> 
+                        } />
+                    </Switch>
+                    {/* <Menu 
+                        selectedDish={this.state.selectedDish} 
+                        dishes={this.state.dishes}
+                        onDishSelect={this.onDishSelect}
+                        isOpen={this.state.modal} 
+                        toggle={() => this.toggle()}
+                    /> */}
+                    <Footer />
+                    </div> 
         );
     }
 }
+
 
 export default Main;
