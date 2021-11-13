@@ -8,8 +8,7 @@ import Home from './HomeComponent';
 import {
     BrowserRouter as Router,
     Switch, 
-    Route,
-    Link
+    Route
   } from "react-router-dom";
 import { Container } from 'reactstrap';
 
@@ -57,7 +56,6 @@ class Main extends Component{
                     <div>
                     <Header />
                     <Switch>
-                        <Route path='/home' component={HomePage} />
                         <Route exact path="/menu" component={
                             () => <Menu dishes={this.state.dishes} 
                                         onDishSelect={this.onDishSelect}
@@ -65,6 +63,7 @@ class Main extends Component{
                                         toggle={() => this.toggle()}
                             /> 
                         } />
+                        <Route component={HomePage} />
                     </Switch>
                     {/* <Menu 
                         selectedDish={this.state.selectedDish} 
