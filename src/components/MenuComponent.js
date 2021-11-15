@@ -1,17 +1,19 @@
 import React from 'react';
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
+import { Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
-
+import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import { Link } from 'react-router-dom';
 
     const MenuItem = (props) => {
         const dish = props.dish;
         return(
-            <Card onClick={() => props.onDishSelect(dish)}>
+            <Card>
+                <Link to={`menu/${dish.id}`}>
                 <CardImg width="100%" src={dish.image} alt={dish.name}/>
                 <CardImgOverlay>
                     <CardTitle tag="h3">{dish.name}</CardTitle>
                 </CardImgOverlay>
+                </Link>
             </Card>
         )  
     }
@@ -20,7 +22,7 @@ import { Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
         const menu = props.dishes.map(i => {
                             return (
                                 <div key={i.id} className="col-12 col-sm-6 col-md-3 p-1">
-                                    <MenuItem dish={i} onDishSelect={props.onDishSelect}/>
+                                    <MenuItem dish={i} />
                                 </div>
                             );
                         });
@@ -29,6 +31,21 @@ import { Card, CardImg, CardImgOverlay, CardTitle} from 'reactstrap';
 
         return (
             <div className="container">
+                {/* Breadcrumbs */}
+                <Row>
+                    <Breadcrumb>
+                        <BreadcrumbItem>
+                            <Link to='/home'>Home</Link>
+                        </BreadcrumbItem>
+                        <BreadcrumbItem active>
+                            Menu
+                        </BreadcrumbItem>
+                    </Breadcrumb>
+                    <Col xs="12">
+                        <h3>Menu</h3>
+                        <hr />
+                    </Col>
+                </Row>
                 <div className="row">
                         {menu}
                 </div>

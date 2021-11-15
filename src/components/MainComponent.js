@@ -9,6 +9,7 @@ import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
 import Home from './HomeComponent';
+import DishDetail from './DishDetail';
 import {
     BrowserRouter as Router,
     Switch, 
@@ -63,6 +64,13 @@ class Main extends Component{
                 </Container>
             )
         }
+
+        const DishWithId = ({match}) => {
+            return (
+                <DishDetail item={this.state.dishes.filter(dish => dish.id === parseInt(match.params.dishId, 10))[0]}/>
+            )
+        }
+
         return (
                     <div>
                     <Header />
@@ -74,6 +82,7 @@ class Main extends Component{
                                         toggle={() => this.toggle()}
                             /> 
                         } />
+                        <Route path="/menu/:dishId" component={DishWithId} />
                         <Route exact path="/contactus" component={Contact} />
                         <Route component={HomePage} />
                     </Switch>

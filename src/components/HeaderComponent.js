@@ -30,7 +30,7 @@ class Header extends Component {
     render() {
         return(
             <>
-                <Navbar dark expand="md" fixed>
+                <Navbar dark expand="md" fixed="top">
                         <NavbarBrand href="/">
                             <NavLink to="/home">
                                 <img src="assets/images/logo.png" width="34" alt="Ristorante Con Fusion"/>

@@ -21,8 +21,8 @@ function RenderCard(props) {
             <CardBody>
                 <CardTitle tag="h3">
                     {item.name}
-                    {item.designation ? <CardSubtitle tag="h5">{item.designation}</CardSubtitle> : null}
-                    {item.abbr ? <CardSubtitle tag="h5">{item.abbr}</CardSubtitle> : null}
+                    {item.designation ? <CardSubtitle tag="span">, {item.designation}</CardSubtitle> : null}
+                    {item.abbr ? <CardSubtitle tag="span">, {item.abbr}</CardSubtitle> : null}
                 </CardTitle>
                 <CardText  className="p1">
                     {item.description}
