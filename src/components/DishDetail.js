@@ -24,7 +24,7 @@ function RenderComments(props) {
     });
     const listComments = comments.map(item => {
         return (
-            <ListGroupItem>
+            <ListGroupItem key={item.id}>
                 <blockquote className="blockquote">
                     {item.comment}{' '}
                     <Badge color="primary" pill>rating: {item.rating}</Badge>

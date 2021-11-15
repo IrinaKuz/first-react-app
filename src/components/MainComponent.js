@@ -4,6 +4,7 @@ import Menu from './MenuComponent';
 import Header from './HeaderComponent';
 import Footer from './FooterComponent';
 import Contact from './ContactComponent';
+import About from './AboutComponent';
 import { DISHES } from '../shared/dishes';
 import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
@@ -83,16 +84,10 @@ class Main extends Component{
                             /> 
                         } />
                         <Route path="/menu/:dishId" component={DishWithId} />
+                        <Route exact path="/about" component={() => <About leaders={this.state.leaders} /> }/>
                         <Route exact path="/contactus" component={Contact} />
                         <Route component={HomePage} />
                     </Switch>
-                    {/* <Menu 
-                        selectedDish={this.state.selectedDish} 
-                        dishes={this.state.dishes}
-                        onDishSelect={this.onDishSelect}
-                        isOpen={this.state.modal} 
-                        toggle={() => this.toggle()}
-                    /> */}
                     <Footer />
                     </div> 
         );
