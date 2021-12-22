@@ -31,7 +31,7 @@ class Main extends Component{
   }
 
     render() {
-        console.log('HomePage!')
+
         const HomePage = () => {
             return(
                 <Container>
