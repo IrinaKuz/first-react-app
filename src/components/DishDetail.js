@@ -17,18 +17,12 @@ import {
     Modal,
     ModalHeader,
     ModalBody,
-    FormGroup,
     Label,
-    Input
 } from 'reactstrap';
-import { COMMENTS } from '../shared/comments';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 
-function RenderComments(props) {
-    const comments = COMMENTS.filter((comment) => {
-        return comment.dishId == props.dish.id;
-    });
+function RenderComments({comments}) {
     const listComments = comments.map(item => {
         return (
             <ListGroupItem key={item.id}>
@@ -68,7 +62,8 @@ class RenderCard extends Component {
         })
     }
     handleSubmitModal(values) {
-        alert('Current state is: ' + JSON.stringify(values));
+        //alert('Current state is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.item.id, values.rating, values.author, values.comment);
     }
     render () {
         let item = this.props.item;
@@ -109,7 +104,11 @@ class RenderCard extends Component {
                         </CardBody>
                     </Col>
                     <Col xs="12">
-                        <RenderComments dish={item} />
+                        <RenderComments 
+                            comments={this.props.comments} 
+                            addComment={this.props.addComment}
+                            dishId={this.props.item.id}
+                        />
                         <Button onClick={this.toggleModal}>Submit Comment</Button>
                     </Col>
                 </Row>
@@ -136,9 +135,9 @@ class RenderCard extends Component {
                             <Row className="form-group">
                                 <Col>
                                     <Label for="username">Username</Label>
-                                    <Control.text model=".username"
-                                        id="username"
-                                        name="username"
+                                    <Control.text model=".author"
+                                        id="author"
+                                        name="author"
                                         className='form-control'
                                         placeholder="Your username"
                                         validators={{
@@ -149,7 +148,7 @@ class RenderCard extends Component {
                                     />
                                     <Errors
                                         className='text-danger'
-                                        model=".username"
+                                        model=".author"
                                         show="touched"
                                         messages={{
                                             required: 'Required',
@@ -162,12 +161,12 @@ class RenderCard extends Component {
                             
                             <Row  className='form-group'>
                                 <Col>
-                                    <Label for="message">
+                                    <Label for="comment">
                                         Message
                                     </Label> 
-                                    <Control.textarea model=".message"
-                                        id="message"
-                                        name="message"
+                                    <Control.textarea model=".comment"
+                                        id="comment"
+                                        name="comment"
                                         className='form-control'
                                         placeholder="Your comment"
                                         rows="5"
