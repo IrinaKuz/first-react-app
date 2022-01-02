@@ -1,7 +1,20 @@
 import React from 'react';
-import { Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Card, CardImg, CardImgOverlay, CardTitle, Breadcrumb, BreadcrumbItem} from 'reactstrap';
+import { 
+    Button,
+    Row,
+    Col,
+    Card, 
+    CardImg, 
+    CardImgOverlay, 
+    CardTitle, 
+    Breadcrumb, 
+    BreadcrumbItem,
+    Modal,
+    ModalHeader,
+    ModalBody,
+    ModalFooter
+} from 'reactstrap';
 import { Link } from 'react-router-dom';
 
     const MenuItem = (props) => {
