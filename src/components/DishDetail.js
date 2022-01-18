@@ -65,7 +65,7 @@ class RenderCard extends Component {
     }
     handleSubmitModal(values) {
         //alert('Current state is: ' + JSON.stringify(values));
-        this.props.addComment(this.props.item.id, values.rating, values.author, values.comment);
+        this.props.postComment(this.props.item.id, values.rating, values.author, values.comment);
     }
     render () {
         let item = this.props.item;
@@ -127,7 +127,7 @@ class RenderCard extends Component {
                         <Col xs="12">
                             <RenderComments 
                                 comments={this.props.comments} 
-                                addComment={this.props.addComment}
+                                postComment={this.props.postComment}
                                 dishId={this.props.item.id}
                             />
                             <Button onClick={this.toggleModal}>Submit Comment</Button>
