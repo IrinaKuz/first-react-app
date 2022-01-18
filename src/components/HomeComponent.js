@@ -13,13 +13,15 @@ import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
 
 function RenderCard(props) {
+    console.log('Render Card!!!')
+    console.log(props);
     if(props.isLoading) {
         return(
             <Loading />
         )
-    } else if (props.dishesErrMess) {
+    } else if (props.errMess) {
         return(
-            <h4>{props.dishesErrMess}</h4>
+            <h4>{props.errMess}</h4>
         )
     } else {
         return(
@@ -57,10 +59,13 @@ function Home(props) {
                     <RenderCard 
                         item={props.promotion} 
                         isLoading={props.promosLoading} 
-                        errMess={props.promoErrMess} />
+                        errMess={props.promosErrMess} />
                 </Col>
                 <Col xs="12" md="" className="m-1">
-                    <RenderCard item={props.leader} />
+                    <RenderCard 
+                        item={props.leader} 
+                        errMess={props.errMess}
+                    />
                 </Col>
             </Row>
         </Container>
